@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Search and Price Calculator</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px;
+            margin-left: 5px;
+            background-color: royalblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product {
+            background-color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #total {
+            margin-top: 20px;
+            font-size: 20px;
+            color: darkgreen;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Product Search and Price Calculator</h1>
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search Product"
+        onkeyup="searchProducts()"
+    >
+
+    <button onclick="focusInput()">
+        Focus Search Box
+    </button>
+
+    <div id="productList"></div>
+
+    <div id="total"></div>
+
+<script>
+
+    let products = [
+        { id: 1, name: "Laptop", price: 50000 },
+        { id: 2, name: "Mobile", price: 20000 },
+        { id: 3, name: "Headphones", price: 3000 },
+        { id: 4, name: "Keyboard", price: 1500 }
+    ];
+
+    function displayProducts(productArray) {
+
+        let productList = document.getElementById("productList");
+
+        productList.innerHTML = "";
+
+        let totalPrice = 0;
+
+        for (let i = 0; i < productArray.length; i++) {
+
+            totalPrice += productArray[i].price;
+
+            productList.innerHTML += `
+
+                <div class="product">
+
+                    <h3>${productArray[i].name}</h3>
+
+                    <p>Price: ₹${productArray[i].price}</p>
+
+                    <button onclick="removeProduct(${productArray[i].id})">
+                        Remove
+                    </button>
+
+                </div>
+            `;
+        }
+
+        document.getElementById("total").innerHTML =
+            "Total Price: ₹" + totalPrice;
+    }
+
+    displayProducts(products);
+
+    function searchProducts() {
+
+        let searchText =
+            document.getElementById("searchBox").value.toLowerCase();
+
+        document.title = searchText;
+
+        let filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchText)
+        );
+
+        displayProducts(filteredProducts);
+    }
+
+    function focusInput() {
+
+        document.getElementById("searchBox").focus();
+    }
+
+    function removeProduct(id) {
+
+        products = products.filter(product => product.id !== id);
+
+        searchProducts();
+    }
+
+</script>
+
+</body>
+</html>
