@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Inventory System</title>
+</head>
+<body>
+    <h1>Product Inventory System (Async/Await)</h1>
+
+    <button onclick="getProducts()">Fetch Products</button>
+    <button onclick="addProduct()">Add Product</button>
+    <button onclick="updateProduct()">Update Product</button>
+    <button onclick="deleteProduct()">Delete Product</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // Initial product list
+        let products = [
+            {
+                id: 1,
+                title: "Laptop",
+                price: 55000
+            },
+            {
+                id: 2,
+                title: "Smartphone",
+                price: 25000
+            },
+            {
+                id: 3,
+                title: "Headphones",
+                price: 3000
+            }
+        ];
+
+        // GET - Fetch product list using Async/Await
+        async function getProducts() {
+            try {
+                output.textContent =
+                    "Product List:\n\n" +
+                    JSON.stringify(products, null, 2);
+            } catch (error) {
+                output.textContent = "Error: " + error;
+            }
+        }
+
+        // POST - Add new product (Siri Chandana)
+        async function addProduct() {
+            try {
+                const newProduct = {
+                    id: products.length + 1,
+                    title: "Siri Chandana",
+                    price: 1500
+                };
+
+                products.push(newProduct);
+
+                output.textContent =
+                    "Product Added Successfully!\n\n" +
+                    JSON.stringify(newProduct, null, 2);
+            } catch (error) {
+                output.textContent = "Error: " + error;
+            }
+        }
+
+        // PUT - Update first product
+        async function updateProduct() {
+            try {
+                products[0].title = "Laptop Updated";
+                products[0].price = 60000;
+
+                output.textContent =
+                    "Product Updated Successfully!\n\n" +
+                    JSON.stringify(products[0], null, 2);
+            } catch (error) {
+                output.textContent = "Error: " + error;
+            }
+        }
+
+        // DELETE - Remove last product
+        async function deleteProduct() {
+            try {
+                const deletedProduct = products.pop();
+
+                output.textContent =
+                    "Product Deleted Successfully!\n\n" +
+                    JSON.stringify(deletedProduct, null, 2);
+            } catch (error) {
+                output.textContent = "Error: " + error;
+            }
+        }
+    </script>
+</body>
+</html>
