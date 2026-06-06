@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management System</title>
+</head>
+<body>
+    <h1>Employee Management System (Promises)</h1>
+
+    <button onclick="getEmployees()">Get Employees</button>
+    <button onclick="addEmployee()">Add Employee</button>
+    <button onclick="updateEmployee()">Update Employee</button>
+    <button onclick="deleteEmployee()">Delete Employee</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // Local employee list with only 3 names
+        let employees = [
+            { id: 1, name: "Abhishek Sharma", email: "abhishek@example.com" },
+            { id: 2, name: "Tilak Varma", email: "tilak@example.com" },
+            { id: 3, name: "Mahesh", email: "mahesh@example.com" }
+        ];
+
+        // GET - Show employee list
+        function getEmployees() {
+            output.textContent =
+                "Employee List:\n\n" +
+                JSON.stringify(employees, null, 2);
+        }
+
+        // POST - Add new employee (Siri Chandana)
+        function addEmployee() {
+            const newEmployee = {
+                id: employees.length + 1,
+                name: "Siri Chandana",
+                email: "sirichandana@example.com"
+            };
+
+            employees.push(newEmployee);
+
+            output.textContent =
+                "Employee Added Successfully!\n\n" +
+                JSON.stringify(newEmployee, null, 2);
+        }
+
+        // PUT - Update first employee
+        function updateEmployee() {
+            employees[0].name = "Abhishek Sharma Updated";
+
+            output.textContent =
+                "Employee Updated Successfully!\n\n" +
+                JSON.stringify(employees[0], null, 2);
+        }
+
+        // DELETE - Remove last employee
+        function deleteEmployee() {
+            const deletedEmployee = employees.pop();
+
+            output.textContent =
+                "Employee Deleted Successfully!\n\n" +
+                JSON.stringify(deletedEmployee, null, 2);
+        }
+    </script>
+</body>
+</html>
