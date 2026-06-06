@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            background: #f2f2f2;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin: 10px 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Records</h2>
+
+<ul id="studentList"></ul>
+
+<button onclick="directDOMUpdate()">
+    Update Using Direct DOM
+</button>
+
+<button onclick="virtualDOMUpdate()">
+    Update Using Virtual DOM
+</button>
+
+<script>
+
+    // Initial student records
+    let students = [
+        "Aarav",
+        "Bhavana",
+        "Charan",
+        "Deepika",
+        "Eswar",
+        "Farhan",
+        "Gopi",
+        "Harika",
+        "Irfan",
+        "Jyothi"
+    ];
+
+    // Function to render complete list
+    function renderList() {
+        const list = document.getElementById("studentList");
+
+        list.innerHTML = "";
+
+        students.forEach((student, index) => {
+            const li = document.createElement("li");
+            li.id = "student-" + index;
+            li.textContent = student;
+            list.appendChild(li);
+        });
+    }
+
+    // Initial render
+    renderList();
+
+    // Direct DOM Approach
+    // Re-renders entire list
+    function directDOMUpdate() {
+
+        students[2] = "Kiran";
+        students[7] = "Lavanya";
+
+        renderList();
+
+        alert("Entire list re-rendered using Direct DOM");
+    }
+
+    // Virtual DOM Approach
+    // Updates only changed records
+    function virtualDOMUpdate() {
+
+        students[1] = "Meghana";
+        students[5] = "Naveen";
+
+        document.getElementById("student-1").textContent = students[1];
+        document.getElementById("student-5").textContent = students[5];
+
+        alert("Only changed records updated using Virtual DOM approach");
+    }
+
+</script>
+
+</body>
+</html>
+

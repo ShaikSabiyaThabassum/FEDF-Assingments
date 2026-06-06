@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Registration Portal</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 20px;
+            background-color: #f0f8ff;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: royalblue;
+            color: white;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 2px solid royalblue;
+            border-radius: 5px;
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Course Registration Portal</h2>
+
+    <button onclick="viewCourses()">
+        View Available Courses
+    </button>
+
+    <button onclick="registerStudent()">
+        Register Student
+    </button>
+
+    <button onclick="updateRegistration()">
+        Update Registration
+    </button>
+
+    <button onclick="cancelRegistration()">
+        Cancel Registration
+    </button>
+
+    <div id="output"></div>
+
+<script>
+
+    let courses = [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Python",
+        "Java"
+    ];
+
+    let registration = {};
+
+    function showMessage(message) {
+        document.getElementById("output").innerHTML = message;
+    }
+
+    async function viewCourses() {
+
+        try {
+
+            showMessage("Loading courses...");
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            let courseList = "";
+
+            for (let i = 0; i < courses.length; i++) {
+                courseList += courses[i] + "<br>";
+            }
+
+            showMessage("<h3>Available Courses:</h3>" + courseList);
+
+        }
+
+        catch(error) {
+            showMessage("Error loading courses");
+        }
+    }
+
+    async function registerStudent() {
+
+        try {
+
+            showMessage("Registering student...");
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            registration = {
+                studentName: "John",
+                course: "React"
+            };
+
+            showMessage(
+                "Success! Student Registered.<br>" +
+                "Name: " + registration.studentName +
+                "<br>Course: " + registration.course
+            );
+
+        }
+
+        catch(error) {
+            showMessage("Registration failed");
+        }
+    }
+
+    async function updateRegistration() {
+
+        try {
+
+            if (!registration.studentName) {
+                throw "No registration found";
+            }
+
+            showMessage("Updating registration...");
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            registration.course = "Node.js";
+
+            showMessage(
+                "Registration Updated Successfully.<br>" +
+                "Name: " + registration.studentName +
+                "<br>Updated Course: " + registration.course
+            );
+
+        }
+
+        catch(error) {
+            showMessage("Error: " + error);
+        }
+    }
+
+    async function cancelRegistration() {
+
+        try {
+
+            if (!registration.studentName) {
+                throw "No registration found";
+            }
+
+            showMessage("Cancelling registration...");
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            registration = {};
+
+            showMessage("Course Registration Cancelled Successfully");
+
+        }
+
+        catch(error) {
+            showMessage("Error: " + error);
+        }
+    }
+
+</script>
+
+</body>
+</html>
