@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Book Management</title>
+</head>
+<body>
+
+<h2>Library Books</h2>
+<div id="books"></div>
+
+<script>
+class Book {
+    constructor(title, author, basePrice, ...otherPrices) {
+        this.title = title;
+        this.author = author;
+        this.basePrice = basePrice;
+        this.otherPrices = otherPrices;
+    }
+
+    // Arrow function to calculate final price
+    calculateFinalPrice = () => {
+        return this.otherPrices.reduce((sum, price) => sum + price, this.basePrice);
+    };
+
+    display() {
+        // Destructuring
+        const { title, author } = this;
+        const finalPrice = this.calculateFinalPrice();
+
+        return `Title: ${title} <br>
+                Author: ${author} <br>
+                Final Price: ₹${finalPrice} <br><br>`;
+    }
+}
+
+// Creating multiple book objects
+const book1 = new Book("JavaScript Basics", "Siri Chandana", 500, 50, -20);
+const book2 = new Book("Data Structures", "Siri", 700, 100, -50);
+const book3 = new Book("Web Development", "Chandana", 600, 80, -30);
+
+// Display in browser
+const booksDiv = document.getElementById("books");
+booksDiv.innerHTML =
+    book1.display() +
+    book2.display() +
+    book3.display();
+</script>
+
+</body>
+</html>
