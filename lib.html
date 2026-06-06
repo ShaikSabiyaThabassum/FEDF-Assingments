@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Book Management</title>
+</head>
+<body>
+    <h1>Library Book Management (Promises)</h1>
+
+    <button onclick="getBooks()">Display Books</button>
+    <button onclick="addBook()">Add Book</button>
+    <button onclick="updateBook()">Update Book</button>
+    <button onclick="deleteBook()">Delete Book</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // Initial book list with normal book titles
+        let books = [
+            {
+                id: 1,
+                title: "Pride and Prejudice",
+                author: "Jane Austen"
+            },
+            {
+                id: 2,
+                title: "Harry Potter",
+                author: "J.K. Rowling"
+            },
+            {
+                id: 3,
+                title: "The Alchemist",
+                author: "Paulo Coelho"
+            }
+        ];
+
+        // GET - Display all books using Promise
+        function getBooks() {
+            Promise.resolve(books)
+                .then(data => {
+                    output.textContent =
+                        "Book List:\n\n" +
+                        JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    output.textContent = "Error: " + error;
+                });
+        }
+
+        // POST - Add a new book (Siri Chandana as title and author)
+        function addBook() {
+            const newBook = {
+                id: books.length + 1,
+                title: "Siri Chandana",
+                author: "Siri Chandana"
+            };
+
+            Promise.resolve(newBook)
+                .then(book => {
+                    books.push(book);
+                    output.textContent =
+                        "Book Added Successfully!\n\n" +
+                        JSON.stringify(book, null, 2);
+                })
+                .catch(error => {
+                    output.textContent = "Error: " + error;
+                });
+        }
+
+        // PUT - Update first book
+        function updateBook() {
+            Promise.resolve()
+                .then(() => {
+                    books[0].title = "Pride and Prejudice (Updated)";
+                    books[0].author = "Jane Austen";
+
+                    output.textContent =
+                        "Book Updated Successfully!\n\n" +
+                        JSON.stringify(books[0], null, 2);
+                })
+                .catch(error => {
+                    output.textContent = "Error: " + error;
+                });
+        }
+
+        // DELETE - Remove last book
+        function deleteBook() {
+            Promise.resolve()
+                .then(() => {
+                    const deletedBook = books.pop();
+
+                    output.textContent =
+                        "Book Deleted Successfully!\n\n" +
+                        JSON.stringify(deletedBook, null, 2);
+                })
+                .catch(error => {
+                    output.textContent = "Error: " + error;
+                });
+        }
+    </script>
+</body>
+</html>
